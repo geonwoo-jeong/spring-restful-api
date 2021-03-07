@@ -2,6 +2,7 @@ package com.geonwoojeong.restfulwebservice.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,5 +44,14 @@ public class UserController {
             .toUri();
 
     return ResponseEntity.created(location).build();
+  }
+
+  @DeleteMapping("/users/{id}")
+  public void deleteUser(@PathVariable int id) {
+    User user = userDaoService.deleteById(id);
+
+    if (user == null) {
+      throw new UserNotFoundException(String.format("ID[%s] not found", id));
+    }
   }
 }
