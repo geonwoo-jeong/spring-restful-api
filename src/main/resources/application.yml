@@ -9,6 +9,10 @@ spring:
   messages:
     basename: messages
     fallback-to-system-locale: false
+  security:
+    user:
+      name: username
+      password: password
 
 management:
   endpoints:
